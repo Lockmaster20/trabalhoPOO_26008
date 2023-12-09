@@ -1,0 +1,192 @@
+﻿/*
+*	<copyright file="Alojamento" company="IPCA"></copyright>
+* 	<author>Diogo Fernandes</author>
+*	<contact>a26008@alunos.ipca.pt</contact>
+*   <date>12/9/2023 3:13:44 AM</date>
+*	<description>Classe para descrever um alojamento</description>
+**/
+
+using Outros;
+using System;
+
+namespace ObjetosNegocio
+{
+    [Serializable]
+    public class Alojamento
+    {
+        #region Atributos
+
+        static int totalAlojamentos;
+
+        int codigoAlojamento;
+        Morada morada;
+        int quartos;
+        int camas;
+        int casasBanho;
+        int cozinhas;
+        double preco;
+
+        #endregion
+
+        #region Métodos
+
+        #region Construtores
+
+        static Alojamento()
+        {
+            totalAlojamentos = 0;
+        }
+
+        /// <summary>
+        /// Construtor de alojamento.
+        /// </summary>
+        /// <param name="codigoAlojamento">Código do alojamento.</param>
+        public Alojamento(int codigoAlojamento)
+        {
+            this.codigoAlojamento = codigoAlojamento;
+            morada = new Morada();
+            quartos = -1;
+            camas = -1;
+            casasBanho = -1;
+            cozinhas = -1;
+            preco = 0;
+
+            totalAlojamentos++;
+        }
+
+        /// <summary>
+        /// Construtor de alojamento com os dados completos.
+        /// </summary>
+        /// <param name="codigoAlojamento">Código do alojamento.</param>
+        /// <param name="morada">Morada do alojamento.</param>
+        /// <param name="quartos">Número de quartos do alojamento.</param>
+        /// <param name="camas">Número de camas do alojamento.</param>
+        /// <param name="casasBanho">Número de casas de banho do alojamento.</param>
+        /// <param name="cozinhas">Número de cozinhas do alojamento.</param>
+        /// <param name="preco">Preço por dia do alojamento.</param>
+        public Alojamento(int codigoAlojamento, Morada morada, int quartos, int camas, int casasBanho, int cozinhas, double preco)
+        {
+            this.codigoAlojamento = codigoAlojamento;
+            this.morada = morada;
+            this.quartos = quartos;
+            this.camas = camas;
+            this.casasBanho = casasBanho;
+            this.cozinhas = cozinhas;
+            this.preco = preco;
+
+            totalAlojamentos++;
+        }
+
+        #endregion
+
+        #region Propriedades
+
+        /// <summary>
+        /// Propriedade para o atributo CodigoAlojamento, pode obter o código do alojamento, mas não o pode alterar
+        /// </summary>
+        public int CodigoAlojamento
+        {
+            get { return codigoAlojamento; }
+            set { }
+        }
+
+        /// <summary>
+        /// Propriedade para o atributo Morada.
+        /// </summary>
+        public Morada Morada
+        {
+            get { return morada; }
+            set { morada = value; }
+        }
+
+        /// <summary>
+        /// Propriedade para o atributo Quartos.
+        /// </summary>
+        public int Quartos
+        {
+            get { return quartos; }
+            set { quartos = value; }
+        }
+
+        /// <summary>
+        /// Propriedade para o atributo Camas.
+        /// </summary>
+        public int Camas
+        {
+            get { return camas; }
+            set { quartos = value; }
+        }
+
+        /// <summary>
+        /// Propriedade para o atributo CasasBanho.
+        /// </summary>
+        public int CasasBanho
+        {
+            get { return casasBanho; }
+            set { casasBanho = value; }
+        }
+
+        /// <summary>
+        /// Propriedade para o atributo Cozinhas.
+        /// </summary>
+        public int Cozinhas
+        {
+            get { return cozinhas; }
+            set { cozinhas = value; }
+        }
+
+        /// <summary>
+        /// Propriedade para o atributo Preco.
+        /// </summary>
+        public double Preco
+        {
+            get { return preco; }
+            set { preco = value; }
+        }
+
+        #endregion
+
+        #region Operadores
+
+        #endregion
+
+        #region Overrides
+
+        /// <summary>
+        /// Redefinição do método ToString.
+        /// </summary>
+        /// <returns>Devolve uma string com o formato redefinido do alojamento.</returns>
+        public override string ToString()
+        {
+            return String.Format("Morada: {0}; Quartos: {1}; Camas: {2};Casas de Banho: {3}; Cozinhas: {4}; Preço: {5:0.00}", Morada.ToString(), Quartos.ToString(), Camas.ToString(), CasasBanho.ToString(), Cozinhas.ToString(), Preco);
+        }
+
+        /// <summary>
+        /// Redefinição do método Equals, verifica se o objeto recebido é igual ao alojamento.
+        /// </summary>
+        /// <param name="objeto">Objeto a ser comparado com o alojamento.</param>
+        /// <returns>
+        /// Se tiverem o mesmo código ou os mesmos valores devolve verdadeiro, caso contrário devolve falso.
+        /// </returns>
+        public override bool Equals(object objeto)
+        {
+            if (objeto is Alojamento)
+            {
+                Alojamento a = (Alojamento)objeto;
+                if (CodigoAlojamento == a.CodigoAlojamento || (Morada.Equals(a.Morada) && (Quartos == a.Quartos) && (Camas == a.Camas) && (CasasBanho == a.CasasBanho) && (Cozinhas == a.Cozinhas) && (Preco == a.Preco)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        #endregion
+
+        #region Outros Métodos
+
+        #endregion
+
+        #endregion
+    }
+}
