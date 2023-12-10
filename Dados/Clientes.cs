@@ -8,6 +8,8 @@
 
 using ObjetosNegocio;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Dados
 {
@@ -125,6 +127,53 @@ namespace Dados
             if (!ExisteCliente(codigo)) return false;
 
             return listaClientes.Remove(EncontraCliente(codigo));
+        }
+
+        /// <summary>
+        /// Método para remover todos os clientes da lista.
+        /// </summary>
+        /// <returns></returns>
+        public static bool RemoverTodosClientes()
+        {
+            listaClientes.Clear();
+            return true;
+        }
+
+        /// <summary>
+        /// Método para ordenar a lista.
+        /// </summary>
+        public static void OrdenaLista()
+        {
+            listaClientes.Sort();
+        }
+
+        /// <summary>
+        /// Método para ordenar a lista por nome do cliente.
+        /// </summary>
+        public static void OrdenaListaNome()
+        {
+            listaClientes.Sort(new PessoaPorNome());
+        }
+
+        // !!! testar códigos guardar, carregar
+        public static bool GravaClientes(string ficheiro)
+        {
+            Stream s = File.Open(ficheiro, FileMode.Create);
+            //testar se ficheiro...
+            BinaryFormatter b = new BinaryFormatter();
+            b.Serialize(s, listaClientes);
+            s.Close();
+            return true;
+        }
+
+        public static bool LoadProdutos(string ficheiro)
+        {
+            Stream s = File.Open(ficheiro, FileMode.Open);
+            //testar se ficheiro...
+            BinaryFormatter b = new BinaryFormatter();
+            listaClientes = (List<Cliente>)b.Deserialize(s);
+            s.Close();
+            return true;
         }
 
         #endregion

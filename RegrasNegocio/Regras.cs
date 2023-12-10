@@ -22,6 +22,24 @@ namespace RegrasNegocio
 
         }
 
+        public static bool RemoverCliente(Cliente c)
+        {
+            return Clientes.RemoverCliente(c);
+
+        }
+
+        public static bool RemoverCliente(int codigo)
+        {
+            //  !!! Adicionar regras
+            return Clientes.RemoverCliente(codigo);
+
+        }
+
+        public static void OrdenarCliente()
+        {
+            Clientes.OrdenaListaNome();
+        }
+
         #endregion
     }
 }

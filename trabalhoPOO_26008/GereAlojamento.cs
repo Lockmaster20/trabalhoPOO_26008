@@ -46,12 +46,16 @@ namespace trabalhoPOO_26008
             Cliente cli1 = new Cliente(p3, 1, 123.42);
             Cliente cli2 = new Cliente(p1, 2);
             Cliente cli3 = new Cliente(p2, 3);
-            Cliente cli4 = new Cliente(p3, 4);
+            Cliente cli4 = new Cliente(p4, 4);
 
             bool b1 = Regras.AdicionarCliente(cli1);
             bool b2 = Regras.AdicionarCliente(cli2);
             bool b3 = Regras.AdicionarCliente(cli3);
             bool b4 = Regras.AdicionarCliente(cli4);
+
+            Regras.OrdenarCliente();
+
+            bool b5 = Regras.AdicionarCliente(cli4);
 
             int tst = 0;
         }
