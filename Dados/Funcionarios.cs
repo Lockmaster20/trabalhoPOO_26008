@@ -92,6 +92,28 @@ namespace Dados
         }
 
         /// <summary>
+        /// Método para verificar se a lista tem o funcionário gestor através do código.
+        /// </summary>
+        /// <param name="codigo">Código a verificar</param>
+        /// <returns>Devolve verdadeiro se existe ou falso se não existe</returns>
+        public static bool ExisteFuncionarioGestor(int codigo)
+        {
+            if (EncontraFuncionarioGestor(codigo) == null) return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Método para encontrar o funcionário com o código especificado que é gestor.
+        /// </summary>
+        /// <param name="codigo">Código do funcionário a encontrar.</param>
+        /// <returns>Devolve o funcionário com o código ou null se não encontrar.</returns>
+        public static Funcionario EncontraFuncionarioGestor(int codigo)
+        {
+            return listaFuncionarios.Find(funcionario => funcionario.CodigoFuncionario == codigo && funcionario.Cargo == TipoCargo.Gestor);
+        }
+
+        /// <summary>
         /// Adiciona o funcionário na lista.
         /// </summary>
         /// <param name="f">Funcionário a adicionar.</param>

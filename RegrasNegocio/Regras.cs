@@ -18,6 +18,13 @@ namespace RegrasNegocio
     {
         #region Clientes
 
+        /// <summary>
+        /// Método para adicionar um cliente à lista de clientes. Só adiciona se os dados forem válidos.
+        /// </summary>
+        /// <param name="c">Cliente a adicionar.</param>
+        /// <returns>Verdadeiro se adiconar com sucesso ou falso se não.</returns>
+        /// <exception cref="ClienteExisteException"></exception>
+        /// <exception cref="Exception"></exception>
         public static bool AdicionarCliente(Cliente c)
         {
             if(c.CodigoCliente > 0 && !String.IsNullOrEmpty(c.Nome) && c.Credito >= 0 && c.NumeroContribuinte > 0)
@@ -39,6 +46,11 @@ namespace RegrasNegocio
             return false;
         }
 
+        /// <summary>
+        /// Método para remover um cliente da lista de clientes.
+        /// </summary>
+        /// <param name="c">Cliente a remover.</param>
+        /// <returns>Verdadeiro se remover com sucesso ou falso se não.</returns>
         public static bool RemoverCliente(Cliente c)
         {
             if (Reservas.ExisteReservaCliente(c.CodigoCliente))
@@ -50,6 +62,11 @@ namespace RegrasNegocio
 
         }
 
+        /// <summary>
+        /// Método para remover um cliente da lista de clientes pelo código.
+        /// </summary>
+        /// <param name="codigo">Cliente a remover.</param>
+        /// <returns>Verdadeiro se remover com sucesso ou falso se não.</returns>
         public static bool RemoverCliente(int codigo)
         {
             if (Reservas.ExisteReservaCliente(codigo))
@@ -60,11 +77,17 @@ namespace RegrasNegocio
             return Clientes.RemoverCliente(codigo);
         }
 
+        /// <summary>
+        /// Método para ordenar a lista de clientes.
+        /// </summary>
         public static void OrdenarClientes()
         {
             Clientes.OrdenaLista();
         }
 
+        /// <summary>
+        /// Método para ordenar a lista de clientes por nome.
+        /// </summary>
         public static void OrdenarClientesNome()
         {
             Clientes.OrdenaListaNome();
@@ -74,6 +97,13 @@ namespace RegrasNegocio
 
         #region Funcionarios
 
+        /// <summary>
+        /// Método para adicionar um funcionário à lista de funcionários. Só adiciona se os dados forem válidos.
+        /// </summary>
+        /// <param name="f">Funcionário a adicionar.</param>
+        /// <returns>Verdadeiro se adiconar com sucesso ou falso se não.</returns>
+        /// <exception cref="FuncionarioExisteException"></exception>
+        /// <exception cref="Exception"></exception>
         public static bool AdicionarFuncionario(Funcionario f)
         {
             if (f.CodigoFuncionario> 0 && !String.IsNullOrEmpty(f.Nome) && f.NumeroContribuinte > 0)
@@ -95,6 +125,11 @@ namespace RegrasNegocio
             return false;
         }
 
+        /// <summary>
+        /// Método para remover um funcionário da lista de funcionários.
+        /// </summary>
+        /// <param name="f">Funcionário a remover.</param>
+        /// <returns>Verdadeiro se remover com sucesso ou falso se não.</returns>
         public static bool RemoverFuncionario(Funcionario f)
         {
 
@@ -106,6 +141,11 @@ namespace RegrasNegocio
             return Funcionarios.RemoverFuncionario(f);
         }
 
+        /// <summary>
+        /// Método para remover um funcionário da lista de funcionários pelo código.
+        /// </summary>
+        /// <param name="codigo">Funcionário a remover.</param>
+        /// <returns>Verdadeiro se remover com sucesso ou falso se não.</returns>
         public static bool RemoverFuncionario(int codigo)
         {
 
@@ -117,11 +157,17 @@ namespace RegrasNegocio
             return Funcionarios.RemoverFuncionario(codigo);
         }
 
+        /// <summary>
+        /// Método para ordenar a lista de funcionários.
+        /// </summary>
         public static void OrdenarFuncionarios()
         {
             Funcionarios.OrdenaLista();
         }
 
+        /// <summary>
+        /// Método para ordenar a lista de funcionários por nome.
+        /// </summary>
         public static void OrdenarFuncionariosNome()
         {
             Funcionarios.OrdenaListaNome();
@@ -130,6 +176,12 @@ namespace RegrasNegocio
         #endregion
 
         #region Alojamentos
+
+        /// <summary>
+        /// Método para verificar se os dados de uma morada são válidos
+        /// </summary>
+        /// <param name="m">Morada a verificar.</param>
+        /// <returns></returns>
         private static bool VerificaMorada(Morada m)
         {
             if (!String.IsNullOrEmpty(m.Rua) && !String.IsNullOrEmpty(m.CodigoPostal) && !String.IsNullOrEmpty(m.Localidade) && m.Numero >= 0)
@@ -140,6 +192,13 @@ namespace RegrasNegocio
             return false;
         }
 
+        /// <summary>
+        /// Método para adicionar um alojamento à lista de alojamentos. Só adiciona se os dados forem válidos.
+        /// </summary>
+        /// <param name="a">Alojamento a adicionar.</param>
+        /// <returns>Verdadeiro se adiconar com sucesso ou falso se não.</returns>
+        /// <exception cref="AlojamentoExisteException"></exception>
+        /// <exception cref="Exception"></exception>
         public static bool AdicionarAlojamento(Alojamento a)
         {
             if (a.CodigoAlojamento >= 0 && a.Cozinhas >= 0 && a.Quartos >= 0 && a.Camas >= 0 && a.CasasBanho >= 0 && a.Preco >= 0 && VerificaMorada(a.Morada))
@@ -162,6 +221,11 @@ namespace RegrasNegocio
             return false;
         }
 
+        /// <summary>
+        /// Método para remover um alojamento da lista de alojamentos.
+        /// </summary>
+        /// <param name="a">Alojamento a remover.</param>
+        /// <returns>Verdadeiro se remover com sucesso ou falso se não.</returns>
         public static bool RemoverAlojamento(Alojamento a)
         {
             if (Reservas.ExisteReservaAlojamento(a.CodigoAlojamento))
@@ -172,6 +236,11 @@ namespace RegrasNegocio
             return Alojamentos.RemoverAlojamento(a);
         }
 
+        /// <summary>
+        /// Método para remover um alojamento da lista de alojamentos pelo código.
+        /// </summary>
+        /// <param name="codigo">Alojamento a remover.</param>
+        /// <returns>Verdadeiro se remover com sucesso ou falso se não.</returns>
         public static bool RemoverAlojamento(int codigo)
         {
 
@@ -183,6 +252,9 @@ namespace RegrasNegocio
             return Alojamentos.RemoverAlojamento(codigo);
         }
 
+        /// <summary>
+        /// Método para ordenar a lista de alojamentos.
+        /// </summary>
         public static void OrdenarAlojamentos()
         {
             Alojamentos.OrdenaLista();
@@ -211,7 +283,7 @@ namespace RegrasNegocio
         /// <returns>Verdadeiro se adiconar com sucesso ou falso se não.</returns>
         public static bool AdicionarReserva(Reserva r)
         {
-            if (r.CalculaDias() > 0 && Clientes.ExisteCliente(r.CodigoCliente) && Alojamentos.ExisteAlojamento(r.CodigoAlojamento) && Funcionarios.ExisteFuncionario(r.Gestor))
+            if (r.CalculaDias() > 0 && Clientes.ExisteCliente(r.CodigoCliente) && Alojamentos.ExisteAlojamento(r.CodigoAlojamento) && Funcionarios.ExisteFuncionarioGestor(r.Gestor))
             {
                 if (r.Estado == EstadoReserva.Fechada || r.Estado == EstadoReserva.Cancelada)
                 {
