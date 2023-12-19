@@ -53,9 +53,8 @@ namespace trabalhoPOO_26008
             bool b3 = Regras.AdicionarCliente(cli3);
             bool b4 = Regras.AdicionarCliente(cli4);
 
-            Regras.OrdenarCliente();
+            Regras.OrdenarClientes();
 
-            bool b51 = Regras.ExisteCliente(5);
             bool b5 = Regras.AdicionarCliente(cli4);
 
             int tst = 0;

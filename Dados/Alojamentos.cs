@@ -156,12 +156,14 @@ namespace Dados
             listaAlojamentos.Sort();
         }
 
+            // !!! Terminar os sort
+        /*
         /// <summary>
         /// Método para ordenar a lista por preco ascendente.
         /// </summary>
         public static void OrdenaListaPrecoAsc()
         {
-            //listaAlojamentos.Sort(new AlojamentoPorPrecoAsc());
+            listaAlojamentos.Sort(new AlojamentoPorPrecoAsc());
         }
 
         /// <summary>
@@ -169,8 +171,8 @@ namespace Dados
         /// </summary>
         public static void OrdenaListaPrecoDec()
         {
-            //listaAlojamentos.Sort(new AlojamentoPorPrecoDec());
-        }
+            listaAlojamentos.Sort(new AlojamentoPorPrecoDec());
+        }*/
 
         // !!! testar códigos guardar, carregar
         public static bool GravaAlojamentos()

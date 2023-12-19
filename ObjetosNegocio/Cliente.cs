@@ -151,6 +151,20 @@ namespace ObjetosNegocio
             return CodigoCliente.CompareTo(c.CodigoCliente);
         }
 
+        /// <summary>
+        /// Método para verificar se o cliente tem créditos suficientes para realizar uma ação, através de uma soma do valor recebido aos créditos do cliente.
+        /// </summary>
+        /// <param name="valor">Valor a somar a créditos</param>
+        /// <returns>Devolve verdadeiro se a soma for superior ou igual a 0, devolve falso se for menor.</returns>
+        public bool TemCreditoSuficiente(double valor)
+        {
+            if (credito + valor >= 0)
+            {
+                return true;
+            }
+
+            return false;
+
         #endregion
 
         #endregion

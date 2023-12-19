@@ -83,13 +83,35 @@ namespace Dados
         }
 
         /// <summary>
-        /// Método para verificar se o cliente tem
+        /// Método para encontrar a reserva aberta do cliente.
+        /// </summary>
+        /// <param name="codigo">Código do cliente a encontrar.</param>
+        /// <returns>Devolve umaa reserva do cliente.</returns>
+        public static Reserva EncontraReservaCliente(int codigo)
+        {
+            return listaReservas.Find(reserva => reserva.CodigoCliente == codigo);
+        }
+
+        /// <summary>
+        /// Método para verificar se o cliente tem uma reserva ativa.
         /// </summary>
         /// <param name="codigoCliente"></param>
-        /// <returns></returns>
-        public static bool ExisteReservaCliente(int codigoCliente)
+        /// <returns>Devolve verdadeiro se encontrar a reserva ativa, ou falso se não encontrar.</returns>
+        public static bool ExisteReservaClienteAtiva(int codigoCliente)
         {
             if (EncontraReservaClienteAtiva(codigoCliente) == null) return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Método para verificar se o cliente tem uma reserva.
+        /// </summary>
+        /// <param name="codigoCliente">Código do cliente a encontrar</param>
+        /// <returns>Devolve verdadeiro se encontrar a reserva, ou falso se não encontrar.</returns>
+        public static bool ExisteReservaCliente(int codigoCliente)
+        {
+            if (EncontraReservaCliente(codigoCliente) == null) return false;
 
             return true;
         }
@@ -107,15 +129,59 @@ namespace Dados
         }
 
         /// <summary>
+        /// Método para encontrar uma reserva do alojamento.
+        /// </summary>
+        /// <param name="codigoAlojamento">Código do alojamento a encontrar.</param>
+        /// <returns>Devolve a reserva do alojamento.</returns>
+        public static Reserva EncontraReservaAlojamento(int codigoAlojamento)
+        {
+            return listaReservas.Find(reserva => reserva.CodigoAlojamento == codigoAlojamento);
+        }
+
+        /// <summary>
         /// Método para verificar se um alojamento já tem uma reserva ativa no intervalo de datas.
         /// </summary>
         /// <param name="codigoAlojamento">Código do alojamento a encontrar.</param>
         /// <param name="dataInicio">Data de início da reserva a verificar.</param>
         /// <param name="dataFim">Data de fim da reserva a verificar.</param>
         /// <returns>Devolve verdadeiro se encontrar a reserva, ou falso se não encontrar.</returns>
-        public static bool ExisteReservaAlojamento(int codigoAlojamento, DateTime dataInicio, DateTime dataFim)
+        public static bool ExisteReservaAlojamentoAtiva(int codigoAlojamento, DateTime dataInicio, DateTime dataFim)
         {
             if (EncontraReservaAlojamentoAtiva(codigoAlojamento, dataInicio, dataFim) == null) return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Método para verificar se um alojamento já alguma reserva.
+        /// </summary>
+        /// <param name="codigoAlojamento">Código do alojamento a encontrar.</param>
+        /// <returns>Devolve verdadeiro se encontrar uma reserva, ou falso se não encontrar.</returns>
+        public static bool ExisteReservaAlojamento(int codigoAlojamento)
+        {
+            if (EncontraReservaAlojamento(codigoAlojamento) == null) return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Método para encontrar uma reserva gerida pelo funcionário.
+        /// </summary>
+        /// <param name="codigoFuncionario">Código do funcionário a encontrar.</param>
+        /// <returns>Devolve uma reserva do funcionário.</returns>
+        public static Reserva EncontraReservaFuncionario(int codigoFuncionario)
+        {
+            return listaReservas.Find(reserva => reserva.Gestor == codigoFuncionario);
+        }
+
+        /// <summary>
+        /// Método para verificar se o funcionário gere alguma reserva.
+        /// </summary>
+        /// <param name="codigoFuncionario">Código do funcionário a encontrar.</param>
+        /// <returns>Devolve verdadeiro se encontrar uma reserva, ou falso se não encontrar.</returns>
+        public static bool ExisteReservaFuncionario(int codigoFuncionario)
+        {
+            if (EncontraReservaFuncionario(codigoFuncionario) == null) return false;
 
             return true;
         }

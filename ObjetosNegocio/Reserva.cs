@@ -11,6 +11,12 @@ using System;
 
 namespace ObjetosNegocio
 {
+    interface IReserva
+    {
+        int CalculaDias();
+        bool AtualizaEstado(bool b);
+    }
+
     public enum EstadoReserva
     {
         Aberta,
@@ -184,7 +190,7 @@ namespace ObjetosNegocio
         /// <returns>Devolve o total do preço da reserva.</returns>
         public double CalculaCusto(double preco)
         {
-            return (CalculaDias() * preco);
+            return (-(CalculaDias() * preco));
         }
 
         /// <summary>
