@@ -1,7 +1,7 @@
 ﻿/*
 *	<copyright file="GereAlojamento" company="IPCA"></copyright>
 * 	<author>Diogo Fernandes</author>
-*	<contact>a26008@alunos.ipca.pt</contact>
+*	<contact>a26008@alunos.ipca.pt - github.com/Lockmaster20</contact>
 *   <date>12/8/2023 10:08:00 PM</date>
 *	<description>Programa para a gestão de alojamentos turísticos.</description>
 **/

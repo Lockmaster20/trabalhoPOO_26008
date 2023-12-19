@@ -6,6 +6,7 @@
 *	<description>Lista de clientes</description>
 **/
 
+using Excecoes;
 using ObjetosNegocio;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,8 @@ namespace Dados
     public class Clientes
     {
         #region Atributos
+
+        const string NOMEFICHEIRO = "clientes.bin";
 
         static List<Cliente> listaClientes;
 
@@ -60,8 +63,8 @@ namespace Dados
         /// <summary>
         /// Método para verificar se a lista tem o cliente.
         /// </summary>
-        /// <param name="c"></param>
-        /// <returns></returns>
+        /// <param name="c">Cliente a verificar</param>
+        /// <returns>Devolve verdadeiro se existe ou falso se não existe</returns>
         public static bool ExisteCliente(Cliente c)
         {
             return listaClientes.Contains(c);
@@ -70,8 +73,8 @@ namespace Dados
         /// <summary>
         /// Método para verificar se a lista tem o cliente através do código.
         /// </summary>
-        /// <param name="c"></param>
-        /// <returns></returns>
+        /// <param name="codigo">Código a verificar</param>
+        /// <returns>Devolve verdadeiro se existe ou falso se não existe</returns>
         public static bool ExisteCliente(int codigo)
         {
             if(EncontraCliente(codigo) == null) return false;
@@ -93,11 +96,13 @@ namespace Dados
         /// Adiciona o cliente na lista.
         /// </summary>
         /// <param name="c">Cliente a adicionar.</param>
-        /// <returns></returns>
+        /// <returns>Devolve verdadeiro se conclui com sucesso.</returns>
         public static bool AdicionarCliente(Cliente c)
         {
-            //  !!! Adicionar Exceção
-            if (ExisteCliente(c)) return false;
+            if (ExisteCliente(c))
+            {
+                throw new ClienteExisteException();
+            }
 
             listaClientes.Add(c); 
             return true;
@@ -110,8 +115,10 @@ namespace Dados
         /// <returns>Devolve verdadeiro se removeu o cliente com sucesso.</returns>
         public static bool RemoverCliente(Cliente c)
         {
-            //  !!! Adicionar Exceção
-            if (!ExisteCliente(c)) return false;
+            if (!ExisteCliente(c))
+            {
+                throw new ClienteExisteException("O cliente não existe.");
+            }
 
             return listaClientes.Remove(c);
         }
@@ -119,7 +126,7 @@ namespace Dados
         /// <summary>
         /// Remove o cliente da lista pelo código.
         /// </summary>
-        /// <param name="c">Cliente a remover</param>
+        /// <param name="codigo">Cliente a remover</param>
         /// <returns>Devolve verdadeiro se removeu o cliente com sucesso.</returns>
         public static bool RemoverCliente(int codigo)
         {
@@ -156,20 +163,18 @@ namespace Dados
         }
 
         // !!! testar códigos guardar, carregar
-        public static bool GravaClientes(string ficheiro)
+        public static bool GravaClientes()
         {
-            Stream s = File.Open(ficheiro, FileMode.Create);
-            //testar se ficheiro...
+            Stream s = File.Open(NOMEFICHEIRO, FileMode.Create);
             BinaryFormatter b = new BinaryFormatter();
             b.Serialize(s, listaClientes);
             s.Close();
             return true;
         }
 
-        public static bool LoadProdutos(string ficheiro)
+        public static bool CarregaClientes()
         {
-            Stream s = File.Open(ficheiro, FileMode.Open);
-            //testar se ficheiro...
+            Stream s = File.Open(NOMEFICHEIRO, FileMode.Open);
             BinaryFormatter b = new BinaryFormatter();
             listaClientes = (List<Cliente>)b.Deserialize(s);
             s.Close();

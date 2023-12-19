@@ -8,6 +8,8 @@
 
 using ObjetosNegocio;
 using Dados;
+using Excecoes;
+using System;
 
 namespace RegrasNegocio
 {
@@ -18,7 +20,19 @@ namespace RegrasNegocio
         public static bool AdicionarCliente(Cliente c)
         {
             //  !!! Adicionar regras
-            return Clientes.AdicionarCliente(c);
+            //if(c.CodigoCliente > 0)
+            try
+            {
+                return Clientes.AdicionarCliente(c);
+            } 
+            catch (ClienteExisteException e)
+            {
+                throw new Excecoes.ClienteExisteException(e.ToString());
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.ToString());
+            }
 
         }
 
@@ -40,6 +54,15 @@ namespace RegrasNegocio
             Clientes.OrdenaListaNome();
         }
 
+        #endregion
+
+        #region Funcionarios
+        #endregion
+
+        #region Alojamentos
+        #endregion
+
+        #region Reservas
         #endregion
     }
 }

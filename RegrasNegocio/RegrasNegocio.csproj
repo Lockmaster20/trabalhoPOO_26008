@@ -34,6 +34,9 @@
     <Reference Include="Dados">
       <HintPath>..\Dados\bin\Debug\Dados.dll</HintPath>
     </Reference>
+    <Reference Include="Excecoes">
+      <HintPath>..\Excecoes\bin\Debug\Excecoes.dll</HintPath>
+    </Reference>
     <Reference Include="ObjetosNegocio">
       <HintPath>..\ObjetosNegocio\bin\Debug\ObjetosNegocio.dll</HintPath>
     </Reference>
