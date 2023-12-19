@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="DiagramaClasses.cd" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Anotacoes.txt" />

@@ -240,8 +240,25 @@ namespace Dados
             listaReservas.Sort();
         }
 
+        public static bool CancelarReserva(Reserva r)
+        {
+            if (ExisteReserva(r))
+            {
+                return r.AtualizaEstado(false);
+            }
+            return false;
+        }
 
-        public static bool GravaClientes()
+        public static bool TerminarReserva(Reserva r)
+        {
+            if (ExisteReserva(r))
+            {
+                return r.AtualizaEstado(true);
+            }
+            return false;
+        }
+
+        public static bool GravaReservas()
         {
             Stream s = File.Open(NOMEFICHEIRO, FileMode.Create);
             BinaryFormatter b = new BinaryFormatter();
@@ -250,11 +267,11 @@ namespace Dados
             return true;
         }
 
-        public static bool CarregaClientes()
+        public static bool CarregaReservas()
         {
             Stream s = File.Open(NOMEFICHEIRO, FileMode.Open);
             BinaryFormatter b = new BinaryFormatter();
-            listaReservas = (List<Cliente>)b.Deserialize(s);
+            listaReservas = (List<Reserva>)b.Deserialize(s);
             s.Close();
             return true;
         }

@@ -192,11 +192,98 @@ namespace RegrasNegocio
 
         #region Reservas
 
+        /// <summary>
+        /// Método para calcular o custo de uma reserva.
+        /// </summary>
+        /// <param name="r">Reserva que se pretende calcular o custo.</param>
+        /// <returns>Devolve o custo da reserva(Dias*Preço).</returns>
+        private static double CalculaCustoReserva(Reserva r)
+        {
+            return (r.CalculaCusto(Alojamentos.EncontraAlojamento(r.CodigoAlojamento).Preco));
+        }
+
+        /// <summary>
+        /// Método para adiconar uma reserva à lista de reservas. Só pode adicionar a reserva se reservar mais do que 0 dias, e se o cliente, o alojamento e o gestor existirem.
+        /// Se a reserva a adicionar estiver aberta, verifica se o cliente tem créditos suficientes para fazer a reserva.
+        /// Se se verificar, ao fazer a reserva, atualiza os créditos do cliente.
+        /// </summary>
+        /// <param name="r">Reserva a adicionar.</param>
+        /// <returns>Verdadeiro se adiconar com sucesso ou falso se não.</returns>
         public static bool AdicionarReserva(Reserva r)
         {
-            //if (r.)
-                // Se reserva aberta, returar preço aos creditos.
+            if (r.CalculaDias() > 0 && Clientes.ExisteCliente(r.CodigoCliente) && Alojamentos.ExisteAlojamento(r.CodigoAlojamento) && Funcionarios.ExisteFuncionario(r.Gestor))
+            {
+                if (r.Estado == EstadoReserva.Fechada || r.Estado == EstadoReserva.Cancelada)
+                {
+                    return Reservas.AdicionarReserva(r);
+                } 
+                else if(r.Estado == EstadoReserva.Aberta && Clientes.EncontraCliente(r.CodigoCliente).TemCreditoSuficiente(CalculaCustoReserva(r)) && !Reservas.ExisteReservaClienteAtiva(r.CodigoCliente) && !Reservas.ExisteReservaAlojamentoAtiva(r.CodigoAlojamento, r.DataInicio, r.DataFim))
+                {  
+                    if (Reservas.AdicionarReserva(r))
+                    {
+                        return Clientes.EncontraCliente(r.CodigoCliente).AlterarCredito(CalculaCustoReserva(r));
+                    }
+                }
+            }
+
             return false;
+        }
+
+        /// <summary>
+        /// Método para cancelar uma reserva. Só pode terminar uma reserva aberta. 
+        /// Se cancelar 10 dias antes da data de início, devolve metade do valor da reserva ao cliente.
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns>Verdadeiro se cancelar com sucesso ou falso se não.</returns>
+        public static bool CancelarReserva(Reserva r)
+        {
+            if (r.Estado == EstadoReserva.Aberta)
+            {
+                if (Reservas.CancelarReserva(r))
+                {
+                    if ((r.DataInicio-DateTime.Now).Days >= 10)
+                    {
+                        return Clientes.EncontraCliente(r.CodigoCliente).AlterarCredito(-(CalculaCustoReserva(r)/2));
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Método para terminar uma reserva aberta. Só pode terminar depois da data de início da reserva.
+        /// </summary>
+        /// <param name="r">Reserva a terminar.</param>
+        /// <returns>Verdadeiro se terminar com sucesso ou falso se não.</returns>
+        public static bool TerminarReserva(Reserva r)
+        {
+            if (r.Estado == EstadoReserva.Aberta && r.DataInicio<DateTime.Now)
+            {
+                return Reservas.TerminarReserva(r);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Método para remover uma reserva da lista de reservas.
+        /// </summary>
+        /// <param name="r">Reserva a remover.</param>
+        /// <returns>Verdadeiro se remover com sucesso ou falso se não.</returns>
+        public static bool RemoverReserva(Reserva r)
+        {
+            return Reservas.RemoverReserva(r);
+        }
+
+        /// <summary>
+        /// Método para ordenar a lista de reservas.
+        /// </summary>
+        public static void OrdenarReservas()
+        {
+            Reservas.OrdenaLista();
         }
 
 
