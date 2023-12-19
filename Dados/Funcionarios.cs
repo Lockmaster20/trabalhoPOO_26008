@@ -39,6 +39,14 @@ namespace Dados
 
         #region Propriedades
 
+        /// <summary>
+        /// Propriedade para o atributo ListaFuncionarios, pode obter a lista, mas não a pode alterar
+        /// </summary>
+        public List<Funcionario> ListaFuncionarios
+        {
+            get { return listaFuncionarios; }
+        }
+
         #endregion
 
         #region Operadores
@@ -121,8 +129,10 @@ namespace Dados
         /// <returns>Devolve verdadeiro se removeu o funcionário com sucesso.</returns>
         public static bool RemoverFuncionario(int codigo)
         {
-            //  !!! Adicionar Exceção
-            if (!ExisteFuncionario(codigo)) return false;
+            if (!ExisteFuncionario(codigo))
+            {
+                throw new FuncionarioExisteException("O funcionário não existe.");
+            }
 
             return listaFuncionarios.Remove(EncontraFuncionario(codigo));
         }

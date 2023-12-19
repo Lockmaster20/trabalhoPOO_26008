@@ -11,7 +11,14 @@ using System;
 
 namespace ObjetosNegocio
 {
-    public class Reserva
+    public enum EstadoReserva
+    {
+        Aberta,
+        Fechada,
+        Cancelada
+    }
+
+    public class Reserva: IComparable<Reserva>, IReserva
     {
         #region Atributos
 
@@ -22,6 +29,8 @@ namespace ObjetosNegocio
         DateTime dataFim;
         int codigoCliente;
         int codigoGestor;
+
+        EstadoReserva estado;
 
         #endregion
 
@@ -42,13 +51,15 @@ namespace ObjetosNegocio
         /// <param name="dataFim">Data de fim da reserva.</param>
         /// <param name="cliente">Cliente que faz a reserva.</param>
         /// <param name="gestor">Funcionário que gere a reserva.</param>
-        public Reserva(int alojamento, DateTime dataInicio, DateTime dataFim, int cliente, int gestor)
+        /// <param name="estado">Estado da reserva.</param>
+        public Reserva(int alojamento, DateTime dataInicio, DateTime dataFim, int cliente, int gestor, EstadoReserva estado)
         {
             this.codigoAlojamento = alojamento;
             this.dataInicio = dataInicio;
             this.dataFim = DefDataFim(dataFim);
             this.codigoCliente = cliente;
             this.codigoGestor = gestor;
+            this.estado = estado;
         }
 
         #endregion
@@ -95,6 +106,14 @@ namespace ObjetosNegocio
             get { return codigoGestor; }
         }
 
+        /// <summary>
+        /// Propriedade para o atributo Estado, pode obter o estado da reserva, mas não o pode alterar
+        /// </summary>
+        public EstadoReserva Estado
+        {
+            get { return estado; }
+        }
+
         #endregion
 
         #region Operadores
@@ -124,7 +143,7 @@ namespace ObjetosNegocio
             if (objeto is Reserva)
             {
                 Reserva r = (Reserva)objeto;
-                if ((this.CodigoAlojamento == r.CodigoAlojamento) && (Validacoes.VerificaSobreposicaoDatas(DataInicio, DataFim, r.DataInicio, r.DataFim)))
+                if ((this.CodigoAlojamento == r.CodigoAlojamento) && (Validacoes.VerificaSobreposicaoDatas(DataInicio, DataFim, r.DataInicio, r.DataFim)) && (this.Estado == r.Estado))
                 {
                     return true;
                 }
@@ -156,6 +175,51 @@ namespace ObjetosNegocio
         public int CalculaDias()
         {
             return ((int)((DataFim - DataInicio).TotalDays));
+        }
+
+        /// <summary>
+        /// Método para calcular o custo da reserva, obtem os dias da reserva e multiplica pelo preço recebido.
+        /// </summary>
+        /// <param name="preco">Preço por noite do alojamento</param>
+        /// <returns>Devolve o total do preço da reserva.</returns>
+        public double CalculaCusto(double preco)
+        {
+            return (CalculaDias() * preco);
+        }
+
+        /// <summary>
+        /// Método para alterar o estado da reserva.
+        /// </summary>
+        /// <param name="b">True para fechar a reserva ou false para cancelar.</param>
+        /// <returns>Devolve verdadeiro se houve alteração.</returns>
+        public bool AtualizaEstado(bool b)
+        {
+            if (estado == EstadoReserva.Aberta)
+            {
+                if (b) 
+                { 
+                    estado = EstadoReserva.Fechada; 
+                }
+                else 
+                {
+                    estado = EstadoReserva.Cancelada;
+                }
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Método para comparar Reservas.
+        /// </summary>
+        /// <param name="r">Reserva a comparar.</param>
+        /// <returns>Se a data de início da reserva a comparar for menor devolve 1, se for maior devolve -1, se for igual 0.</returns>
+        public int CompareTo(Reserva r)
+        {
+            if (r is null) return 1;
+
+            return DataInicio.CompareTo(r.DataInicio);
         }
 
         #endregion

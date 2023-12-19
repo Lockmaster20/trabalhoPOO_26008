@@ -64,7 +64,7 @@ namespace Dados
         /// Método para verificar se a lista tem o cliente.
         /// </summary>
         /// <param name="c">Cliente a verificar</param>
-        /// <returns>Devolve verdadeiro se existe ou falso se não existe</returns>
+        /// <returns>Devolve verdadeiro se existe ou falso se não existe.</returns>
         public static bool ExisteCliente(Cliente c)
         {
             return listaClientes.Contains(c);
@@ -101,6 +101,7 @@ namespace Dados
         {
             if (ExisteCliente(c))
             {
+                //  !!! Uso de exceções apenas para testes
                 throw new ClienteExisteException();
             }
 
@@ -130,8 +131,10 @@ namespace Dados
         /// <returns>Devolve verdadeiro se removeu o cliente com sucesso.</returns>
         public static bool RemoverCliente(int codigo)
         {
-            //  !!! Adicionar Exceção
-            if (!ExisteCliente(codigo)) return false;
+            if (!ExisteCliente(codigo))
+            {
+                throw new ClienteExisteException("O cliente não existe.");
+            }
 
             return listaClientes.Remove(EncontraCliente(codigo));
         }

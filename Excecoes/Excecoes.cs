@@ -22,6 +22,7 @@ namespace Excecoes
             throw new ClienteExisteException(e.Message + " - " + s);
         }
     }
+
     public class FuncionarioExisteException : ApplicationException
     {
         public FuncionarioExisteException() : base("O funcionário já existe.") { }
@@ -31,6 +32,18 @@ namespace Excecoes
         public FuncionarioExisteException(string s, Exception e)
         {
             throw new FuncionarioExisteException(e.Message + " - " + s);
+        }
+    }
+
+    public class AlojamentoExisteException : ApplicationException
+    {
+        public AlojamentoExisteException() : base("O alojamento já existe.") { }
+
+        public AlojamentoExisteException(string s) : base(s) { }
+
+        public AlojamentoExisteException(string s, Exception e)
+        {
+            throw new AlojamentoExisteException(e.Message + " - " + s);
         }
     }
 }

@@ -12,7 +12,7 @@ using System;
 namespace ObjetosNegocio
 {
     [Serializable]
-    public class Alojamento
+    public class Alojamento: IComparable<Alojamento>
     {
         #region Atributos
 
@@ -184,6 +184,18 @@ namespace ObjetosNegocio
         #endregion
 
         #region Outros Métodos
+
+        /// <summary>
+        /// Método para comparar Alojamentos.
+        /// </summary>
+        /// <param name="a">Alojamento a comparar.</param>
+        /// <returns>Se o código do alojamento a comparar for menor devolve 1, se for maior devolve -1, se for igual 0.</returns>
+        public int CompareTo(Alojamento a)
+        {
+            if (a is null) return 1;
+
+            return CodigoAlojamento.CompareTo(a.CodigoAlojamento);
+        }
 
         #endregion
 

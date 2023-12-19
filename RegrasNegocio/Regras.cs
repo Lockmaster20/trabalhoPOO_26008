@@ -54,6 +54,11 @@ namespace RegrasNegocio
             Clientes.OrdenaListaNome();
         }
 
+        public static bool ExisteCliente(int codigo)
+        {
+            return Clientes.ExisteCliente(codigo);
+        }
+
         #endregion
 
         #region Funcionarios
