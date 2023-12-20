@@ -38,26 +38,32 @@ namespace trabalhoPOO_26008
             //lc3.Add(c3);
             //lc3.Add(c6);
 
-            Pessoa p1 = new Pessoa("Marco", 'M', 100);
-            Pessoa p2 = new Pessoa("Ana", 'f', 110);
-            Pessoa p3 = new Pessoa("Bino", 'a', 99);
-            Pessoa p4 = new Pessoa("Pess", 't', 01);
+            //Pessoa p1 = new Pessoa("Marco", 'M', 100);
+            //Pessoa p2 = new Pessoa("Ana", 'f', 110);
+            //Pessoa p3 = new Pessoa("Bino", 'a', 99);
+            //Pessoa p4 = new Pessoa("Pess", 't', 01);
 
-            Cliente cli1 = new Cliente(p3, 1, 123.42);
-            Cliente cli2 = new Cliente(p1, 2);
-            Cliente cli3 = new Cliente(p2, 3);
-            Cliente cli4 = new Cliente(p4, 4);
+            //Cliente cli1 = new Cliente(p3, 123.42);
+            //Cliente cli2 = new Cliente(p1, 2);
+            //Cliente cli3 = new Cliente(p2, 3);
+            //Cliente cli4 = new Cliente(p4, 4);
 
-            bool b1 = Regras.AdicionarCliente(cli1);
-            bool b2 = Regras.AdicionarCliente(cli2);
-            bool b3 = Regras.AdicionarCliente(cli3);
-            bool b4 = Regras.AdicionarCliente(cli4);
+            //bool b1 = Regras.AdicionarCliente(cli1);
+            //bool b2 = Regras.AdicionarCliente(cli2);
+            //bool b3 = Regras.AdicionarCliente(cli3);
+            //bool b4 = Regras.AdicionarCliente(cli4);
 
-            Regras.OrdenarClientes();
+            //Regras.OrdenarClientesNome();
 
-            bool b5 = Regras.AdicionarCliente(cli4);
 
-            int tst = 0;
+            //bool bl2 = Regras.CarregaClientes();
+
+            Pessoa p5 = new Pessoa("Pess5", 'M', 555);
+            Cliente cli5 = new Cliente(p5, 5);
+            bool a = Regras.AdicionarCliente(cli5);
+            Console.WriteLine("-----------------\n" + a.ToString());
+
+            bool bl1 = true;
         }
     }
 }

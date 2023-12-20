@@ -15,7 +15,7 @@ namespace ObjetosNegocio
     {
         #region Atributos
 
-        static int totalClientes;
+        //static int totalClientes;
 
         int codigoCliente;
         double credito;
@@ -26,10 +26,10 @@ namespace ObjetosNegocio
 
         #region Construtores
 
-        static Cliente()
-        {
-            totalClientes = 0;
-        }
+        //static Cliente()
+        //{
+        //    totalClientes = 0;
+        //}
 
         /// <summary>
         /// Construtor de cliente com base numa pessoa, e um valor de código.
@@ -41,7 +41,7 @@ namespace ObjetosNegocio
             this.codigoCliente = codigoCliente;
             credito = 0;
 
-            totalClientes++;
+            //totalClientes++;
         }
 
 
@@ -56,18 +56,18 @@ namespace ObjetosNegocio
             this.codigoCliente = codigoCliente;
             this.credito = credito;
 
-            totalClientes++;
+            //totalClientes++;
         }
 
         #endregion
 
         #region Propriedades
 
-        public int TotalClientes
-        {
-            get { return totalClientes; }
-            set { }
-        }
+        //public static int TotalClientes
+        //{
+        //    get { return totalClientes; }
+        //    set { }
+        //}
 
         /// <summary>
         /// Propriedade para o atributo CodigoCliente, pode obter o código do cliente, mas não o pode alterar
@@ -164,6 +164,7 @@ namespace ObjetosNegocio
             }
 
             return false;
+        }
 
         #endregion
 

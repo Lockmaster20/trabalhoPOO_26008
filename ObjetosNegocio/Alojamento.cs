@@ -16,7 +16,7 @@ namespace ObjetosNegocio
     {
         #region Atributos
 
-        static int totalAlojamentos;
+        //static int totalAlojamentos;
 
         int codigoAlojamento;
         Morada morada;
@@ -32,10 +32,10 @@ namespace ObjetosNegocio
 
         #region Construtores
 
-        static Alojamento()
-        {
-            totalAlojamentos = 0;
-        }
+        //static Alojamento()
+        //{
+        //    totalAlojamentos = 0;
+        //}
 
         /// <summary>
         /// Construtor de alojamento.
@@ -51,7 +51,7 @@ namespace ObjetosNegocio
             cozinhas = -1;
             preco = 0;
 
-            totalAlojamentos++;
+            //totalAlojamentos++;
         }
 
         /// <summary>
@@ -74,12 +74,18 @@ namespace ObjetosNegocio
             this.cozinhas = cozinhas;
             this.preco = preco;
 
-            totalAlojamentos++;
+            //totalAlojamentos++;
         }
 
         #endregion
 
         #region Propriedades
+
+        //public static int TotalAlojamentos
+        //{
+        //    get { return totalAlojamentos; }
+        //    set { }
+        //}
 
         /// <summary>
         /// Propriedade para o atributo CodigoAlojamento, pode obter o código do alojamento, mas não o pode alterar

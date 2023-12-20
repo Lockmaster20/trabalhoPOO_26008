@@ -21,7 +21,7 @@ namespace ObjetosNegocio
     {
         #region Atributos
 
-        static int totalFuncionarios;
+        //static int totalFuncionarios;
 
         int codigoFuncionario;
         TipoCargo cargo;
@@ -43,18 +43,18 @@ namespace ObjetosNegocio
             this.codigoFuncionario = codigoFuncionario;
             this.cargo = cargo;
 
-            totalFuncionarios++;
+            //totalFuncionarios++;
         }
 
         #endregion
 
         #region Propriedades
 
-        public int TotalFuncionarios 
-        {  
-            get { return totalFuncionarios; }
-            set { }
-        }
+        //public static int TotalFuncionarios 
+        //{  
+        //    get { return totalFuncionarios; }
+        //    set { }
+        //}
 
         /// <summary>
         /// Propriedade para o atributo CodigoFuncionario, pode obter o código do funcionário, mas não o pode alterar

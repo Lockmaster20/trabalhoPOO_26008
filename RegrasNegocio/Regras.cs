@@ -35,11 +35,11 @@ namespace RegrasNegocio
                 }
                 catch (ClienteExisteException e)
                 {
-                    throw new ClienteExisteException(e.ToString());
+                    IO.MostrarMensagem(e.Message);
                 }
                 catch (Exception e)
                 {
-                    throw new Exception(e.ToString());
+                    IO.MostrarMensagem(e.Message);
                 }
             }
 
@@ -58,7 +58,15 @@ namespace RegrasNegocio
                 return false;
             }
 
-            return Clientes.RemoverCliente(c);
+            try
+            {
+                return Clientes.RemoverCliente(c);
+            }
+            catch (ClienteExisteException e)
+            {
+                IO.MostrarMensagem(e.Message);
+            }
+            return false;
 
         }
 
@@ -74,7 +82,15 @@ namespace RegrasNegocio
                 return false;
             }
 
-            return Clientes.RemoverCliente(codigo);
+            try
+            {
+                return Clientes.RemoverCliente(codigo);
+            }
+            catch (ClienteExisteException e)
+            {
+                IO.MostrarMensagem(e.Message);
+            }
+            return false;
         }
 
         /// <summary>
@@ -91,6 +107,32 @@ namespace RegrasNegocio
         public static void OrdenarClientesNome()
         {
             Clientes.OrdenaListaNome();
+        }
+
+        public static bool GravaClientes()
+        {
+            try
+            {
+                return Clientes.GravaClientes();
+            }
+            catch (Exception e)
+            {
+                // !!! IO mostrar erro
+                return false;
+            }
+        }
+
+        public static bool CarregaClientes()
+        {
+            try
+            {
+                return Clientes.CarregaClientes();
+            }
+            catch (Exception e)
+            {
+                // !!! IO mostrar erro
+                return false;
+            }
         }
 
         #endregion
@@ -114,11 +156,11 @@ namespace RegrasNegocio
                 }
                 catch (FuncionarioExisteException e)
                 {
-                    throw new FuncionarioExisteException(e.ToString());
+                    IO.MostrarMensagem(e.Message);
                 }
                 catch (Exception e)
                 {
-                    throw new Exception(e.ToString());
+                    IO.MostrarMensagem(e.Message);
                 }
             }
 
@@ -138,7 +180,15 @@ namespace RegrasNegocio
                 return false;
             }
 
-            return Funcionarios.RemoverFuncionario(f);
+            try
+            {
+                return Funcionarios.RemoverFuncionario(f);
+            }
+            catch (FuncionarioExisteException e)
+            {
+                IO.MostrarMensagem(e.Message);
+            }
+            return false;
         }
 
         /// <summary>
@@ -154,7 +204,15 @@ namespace RegrasNegocio
                 return false;
             }
 
-            return Funcionarios.RemoverFuncionario(codigo);
+            try
+            {
+                return Funcionarios.RemoverFuncionario(codigo);
+            }
+            catch (FuncionarioExisteException e)
+            {
+                IO.MostrarMensagem(e.Message);
+            }
+            return false;
         }
 
         /// <summary>
@@ -209,13 +267,12 @@ namespace RegrasNegocio
                 }
                 catch (AlojamentoExisteException e)
                 {
-                    throw new AlojamentoExisteException(e.ToString());
+                    IO.MostrarMensagem(e.Message);
                 }
                 catch (Exception e)
                 {
-                    throw new Exception(e.ToString());
+                    IO.MostrarMensagem(e.Message);
                 }
-
             }
 
             return false;
@@ -233,7 +290,15 @@ namespace RegrasNegocio
                 return false;
             }
 
-            return Alojamentos.RemoverAlojamento(a);
+            try
+            {
+                return Alojamentos.RemoverAlojamento(a);
+            }
+            catch (AlojamentoExisteException e)
+            {
+                IO.MostrarMensagem(e.Message);
+            }
+            return false;
         }
 
         /// <summary>
@@ -249,7 +314,15 @@ namespace RegrasNegocio
                 return false;
             }
 
-            return Alojamentos.RemoverAlojamento(codigo);
+            try
+            {
+                return Alojamentos.RemoverAlojamento(codigo);
+            }
+            catch (AlojamentoExisteException e)
+            {
+                IO.MostrarMensagem(e.Message);
+            }
+            return false;
         }
 
         /// <summary>

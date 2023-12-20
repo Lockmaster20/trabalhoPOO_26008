@@ -6,39 +6,15 @@
 *	<description>Classe para interagir com o utilizador.</description>
 **/
 
+using System;
+
 namespace Outros
 {
     public class IO
     {
-        #region Atributos
-
-        #endregion
-
-        #region Métodos
-
-        #region Construtores
-        public IO()
-        {
-
+        public static void MostrarMensagem(string m) 
+        { 
+            Console.WriteLine(m);
         }
-        #endregion
-
-        #region Propriedades
-
-        #endregion
-
-        #region Operadores
-
-        #endregion
-
-        #region Overrides
-
-        #endregion
-
-        #region Outros Métodos
-
-        #endregion
-
-        #endregion
     }
 }

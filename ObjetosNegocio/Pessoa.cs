@@ -37,7 +37,7 @@ namespace ObjetosNegocio
         const char DEFAULTSEXO = 'O';
         const int MAXCONTACTOS = 3;
 
-        static int totalPessoas;
+        //static int totalPessoas;
 
         string nome;
         char sexo;
@@ -50,10 +50,10 @@ namespace ObjetosNegocio
 
         #region Construtores
 
-        static Pessoa()
-        {
-            totalPessoas = 0;
-        }
+        //static Pessoa()
+        //{
+        //    totalPessoas = 0;
+        //}
 
         /// <summary>
         /// Construtor de pessoa por defeito.
@@ -64,7 +64,7 @@ namespace ObjetosNegocio
             sexo = DEFAULTSEXO;
             numeroContribuinte = -1;
 
-            totalPessoas++;
+            //totalPessoas++;
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace ObjetosNegocio
             this.sexo = DefSexo(sexo);
             this.numeroContribuinte = numeroContribuinte;
 
-            totalPessoas++;
+            //totalPessoas++;
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace ObjetosNegocio
             }
             this.numeroContribuinte = numeroContribuinte;
 
-            totalPessoas++;
+            //totalPessoas++;
         }
 
         /// <summary>
@@ -118,14 +118,11 @@ namespace ObjetosNegocio
 
         #region Propriedades
 
-        /// <summary>
-        /// Propriedade para o atributo TotalPessoas.
-        /// </summary>
-        public int TotalPessoas
-        {
-            get { return totalPessoas; }
-            set { }
-        }
+        //public static int TotalPessoas
+        //{
+        //    get { return totalPessoas; }
+        //    set { }
+        //}
 
         /// <summary>
         /// Propriedade para o atributo Nome.
