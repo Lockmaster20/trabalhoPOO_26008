@@ -11,6 +11,7 @@ using Dados;
 using Excecoes;
 using Outros;
 using System;
+using System.Collections.Generic;
 
 namespace RegrasNegocio
 {
@@ -35,11 +36,11 @@ namespace RegrasNegocio
                 }
                 catch (ClienteExisteException e)
                 {
-                    IO.MostrarMensagem(e.Message);
+                    throw e;
                 }
                 catch (Exception e)
                 {
-                    IO.MostrarMensagem(e.Message);
+                    throw e;
                 }
             }
 
@@ -64,10 +65,8 @@ namespace RegrasNegocio
             }
             catch (ClienteExisteException e)
             {
-                IO.MostrarMensagem(e.Message);
+                throw e;
             }
-            return false;
-
         }
 
         /// <summary>
@@ -88,9 +87,8 @@ namespace RegrasNegocio
             }
             catch (ClienteExisteException e)
             {
-                IO.MostrarMensagem(e.Message);
+                throw e;
             }
-            return false;
         }
 
         /// <summary>
@@ -109,6 +107,10 @@ namespace RegrasNegocio
             Clientes.OrdenaListaNome();
         }
 
+        /// <summary>
+        /// Método para gravar a lista de clientes num ficheiro
+        /// </summary>
+        /// <returns></returns>
         public static bool GravaClientes()
         {
             try
@@ -117,11 +119,14 @@ namespace RegrasNegocio
             }
             catch (Exception e)
             {
-                // !!! IO mostrar erro
-                return false;
+                throw e;
             }
         }
 
+        /// <summary>
+        /// Método para carregar a lista de clientes de um ficheiro
+        /// </summary>
+        /// <returns></returns>
         public static bool CarregaClientes()
         {
             try
@@ -130,9 +135,17 @@ namespace RegrasNegocio
             }
             catch (Exception e)
             {
-                // !!! IO mostrar erro
-                return false;
+                throw e;
             }
+        }
+
+        /// <summary>
+        /// Método para obter a lista de clientes
+        /// </summary>
+        /// <returns></returns>
+        public static List<Cliente> MostraListaClientes()
+        {
+            return (Clientes.ListaClientes);
         }
 
         #endregion
@@ -156,11 +169,11 @@ namespace RegrasNegocio
                 }
                 catch (FuncionarioExisteException e)
                 {
-                    IO.MostrarMensagem(e.Message);
+                    throw e;
                 }
                 catch (Exception e)
                 {
-                    IO.MostrarMensagem(e.Message);
+                    throw e;
                 }
             }
 
@@ -186,9 +199,8 @@ namespace RegrasNegocio
             }
             catch (FuncionarioExisteException e)
             {
-                IO.MostrarMensagem(e.Message);
+                throw e;
             }
-            return false;
         }
 
         /// <summary>
@@ -210,9 +222,8 @@ namespace RegrasNegocio
             }
             catch (FuncionarioExisteException e)
             {
-                IO.MostrarMensagem(e.Message);
+                throw e;
             }
-            return false;
         }
 
         /// <summary>
@@ -229,6 +240,47 @@ namespace RegrasNegocio
         public static void OrdenarFuncionariosNome()
         {
             Funcionarios.OrdenaListaNome();
+        }
+
+        /// <summary>
+        /// Método para gravar a lista de funcionários num ficheiro.
+        /// </summary>
+        /// <returns></returns>
+        public static bool GravaFuncionarios()
+        {
+            try
+            {
+                return Funcionarios.GravaFuncionarios();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Método para carregar a lista de funcionários de um ficheiro.
+        /// </summary>
+        /// <returns></returns>
+        public static bool CarregaFuncionarios()
+        {
+            try
+            {
+                return Funcionarios.CarregaFuncionarios();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Método para obter a lista de funcionários
+        /// </summary>
+        /// <returns></returns>
+        public static List<Funcionario> MostraListaFuncionarios()
+        {
+            return (Funcionarios.ListaFuncionarios);
         }
 
         #endregion
@@ -267,11 +319,11 @@ namespace RegrasNegocio
                 }
                 catch (AlojamentoExisteException e)
                 {
-                    IO.MostrarMensagem(e.Message);
+                    throw e;
                 }
                 catch (Exception e)
                 {
-                    IO.MostrarMensagem(e.Message);
+                    throw e;
                 }
             }
 
@@ -296,9 +348,8 @@ namespace RegrasNegocio
             }
             catch (AlojamentoExisteException e)
             {
-                IO.MostrarMensagem(e.Message);
+                throw e;
             }
-            return false;
         }
 
         /// <summary>
@@ -320,9 +371,8 @@ namespace RegrasNegocio
             }
             catch (AlojamentoExisteException e)
             {
-                IO.MostrarMensagem(e.Message);
+                throw e;
             }
-            return false;
         }
 
         /// <summary>
@@ -331,6 +381,47 @@ namespace RegrasNegocio
         public static void OrdenarAlojamentos()
         {
             Alojamentos.OrdenaLista();
+        }
+
+        /// <summary>
+        /// Método para gravar a lista de alojamentos num ficheiro.
+        /// </summary>
+        /// <returns></returns>
+        public static bool GravaAlojamentos()
+        {
+            try
+            {
+                return Alojamentos.GravaAlojamentos();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Método para carregar a lista de alojamentos de um ficheiro.
+        /// </summary>
+        /// <returns></returns>
+        public static bool CarregaAlojamentos()
+        {
+            try
+            {
+                return Alojamentos.CarregaAlojamentos();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Método para obter a lista de alojamentos
+        /// </summary>
+        /// <returns></returns>
+        public static List<Alojamento> MostraListaAlojamentos()
+        {
+            return (Alojamentos.ListaAlojamentos);
         }
 
         #endregion
@@ -362,7 +453,7 @@ namespace RegrasNegocio
                 {
                     return Reservas.AdicionarReserva(r);
                 } 
-                else if(r.Estado == EstadoReserva.Aberta && Clientes.EncontraCliente(r.CodigoCliente).TemCreditoSuficiente(CalculaCustoReserva(r)) && !Reservas.ExisteReservaClienteAtiva(r.CodigoCliente) && !Reservas.ExisteReservaAlojamentoAtiva(r.CodigoAlojamento, r.DataInicio, r.DataFim))
+                else if(r.Estado == EstadoReserva.Aberta && (r.DataInicio>=DateTime.Now) && Clientes.EncontraCliente(r.CodigoCliente).TemCreditoSuficiente(CalculaCustoReserva(r)) && !Reservas.ExisteReservaClienteAtiva(r.CodigoCliente) && !Reservas.ExisteReservaAlojamentoAtiva(r.CodigoAlojamento, r.DataInicio, r.DataFim))
                 {  
                     if (Reservas.AdicionarReserva(r))
                     {
@@ -431,6 +522,46 @@ namespace RegrasNegocio
             Reservas.OrdenaLista();
         }
 
+        /// <summary>
+        /// Método para gravar a lista de reservas num ficheiro.
+        /// </summary>
+        /// <returns></returns>
+        public static bool GravaReservas()
+        {
+            try
+            {
+                return Reservas.GravaReservas();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Método para carregar a lista de reservas de um ficheiro.
+        /// </summary>
+        /// <returns></returns>
+        public static bool CarregaReservas()
+        {
+            try
+            {
+                return Reservas.CarregaReservas();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Método para obter a lista de reservas.
+        /// </summary>
+        /// <returns></returns>
+        public static List<Reserva> MostraListaReservas()
+        {
+            return (Reservas.ListaReservas);
+        }
 
         #endregion
     }

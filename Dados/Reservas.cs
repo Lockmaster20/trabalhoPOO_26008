@@ -6,12 +6,12 @@
 *	<description></description>
 **/
 
-using Excecoes;
 using ObjetosNegocio;
 using Outros;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Dados
@@ -45,9 +45,9 @@ namespace Dados
         /// <summary>
         /// Propriedade para o atributo ListaReservas, pode obter a lista, mas não a pode alterar
         /// </summary>
-        public List<Reserva> ListaReservas
+        public static List<Reserva> ListaReservas
         {
-            get { return listaReservas; }
+            get { return listaReservas.ToList(); }
         }
 
         #endregion

@@ -10,6 +10,7 @@ using Excecoes;
 using ObjetosNegocio;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Dados
@@ -43,9 +44,9 @@ namespace Dados
         /// <summary>
         /// Propriedade para o atributo ListaClientes, pode obter a lista, mas não a pode alterar
         /// </summary>
-        public List<Cliente> ListaClientes 
+        public static List<Cliente> ListaClientes 
         { 
-            get { return listaClientes; } 
+            get { return listaClientes.ToList(); } 
         }
 
         #endregion
@@ -165,7 +166,6 @@ namespace Dados
             listaClientes.Sort(new PessoaPorNome());
         }
 
-        // !!! testar códigos guardar, carregar
         public static bool GravaClientes()
         {
             Stream s = File.Open(NOMEFICHEIRO, FileMode.Create);

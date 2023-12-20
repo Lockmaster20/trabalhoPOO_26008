@@ -10,6 +10,7 @@ using Excecoes;
 using ObjetosNegocio;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Dados
@@ -42,9 +43,9 @@ namespace Dados
         /// <summary>
         /// Propriedade para o atributo ListaFuncionarios, pode obter a lista, mas não a pode alterar
         /// </summary>
-        public List<Funcionario> ListaFuncionarios
+        public static List<Funcionario> ListaFuncionarios
         {
-            get { return listaFuncionarios; }
+            get { return listaFuncionarios.ToList(); }
         }
 
         #endregion
@@ -185,7 +186,6 @@ namespace Dados
             listaFuncionarios.Sort(new PessoaPorNome());
         }
 
-        // !!! testar códigos guardar, carregar
         public static bool GravaFuncionarios()
         {
             Stream s = File.Open(NOMEFICHEIRO, FileMode.Create);

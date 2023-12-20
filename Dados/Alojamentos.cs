@@ -10,6 +10,7 @@ using Excecoes;
 using ObjetosNegocio;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Dados
@@ -43,9 +44,9 @@ namespace Dados
         /// <summary>
         /// Propriedade para o atributo ListaAlojamentos, pode obter a lista, mas não a pode alterar
         /// </summary>
-        public List<Alojamento> ListaAlojamentos
+        public static List<Alojamento> ListaAlojamentos
         {
-            get { return listaAlojamentos; }
+            get { return listaAlojamentos.ToList(); }
         }
 
         #endregion
@@ -174,7 +175,6 @@ namespace Dados
             listaAlojamentos.Sort(new AlojamentoPorPrecoDec());
         }*/
 
-        // !!! testar códigos guardar, carregar
         public static bool GravaAlojamentos()
         {
             Stream s = File.Open(NOMEFICHEIRO, FileMode.Create);
