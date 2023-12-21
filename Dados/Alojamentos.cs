@@ -157,8 +157,6 @@ namespace Dados
             listaAlojamentos.Sort();
         }
 
-        // !!! Terminar os sort
-
         /// <summary>
         /// Método para ordenar a lista por preco crescente.
         /// </summary>

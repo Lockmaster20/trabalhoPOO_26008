@@ -130,7 +130,7 @@ namespace ObjetosNegocio
         /// <returns>Devolve uma string com o formato redefinido da reserva.</returns>
         public override string ToString()
         {
-            return String.Format("Cliente {0} reserva alojamento {1}, de {2} a {3}.", CodigoCliente.ToString(), CodigoAlojamento.ToString(), DataInicio.ToString("yyyy/MM/dd"), DataFim.ToString("yyyy/MM/dd"));
+            return String.Format("Cliente {0} reserva alojamento {1}, de {2} a {3}. ({4})", CodigoCliente.ToString(), CodigoAlojamento.ToString(), DataInicio.ToString("yyyy/MM/dd"), DataFim.ToString("yyyy/MM/dd"), Estado.ToString());
         }
 
         /// <summary>
