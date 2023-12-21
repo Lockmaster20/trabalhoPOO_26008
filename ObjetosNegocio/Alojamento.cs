@@ -8,9 +8,27 @@
 
 using Outros;
 using System;
+using System.Collections.Generic;
 
 namespace ObjetosNegocio
 {
+    /// <summary>
+    /// Classe para comparar dois alojamentos pelo preço crescente.
+    /// </summary>
+    public class AlojamentoPorPreco : IComparer<Alojamento>
+    {
+        /// <summary>
+        /// Compara duas pessoas.
+        /// </summary>
+        /// <param name="a1"></param>
+        /// <param name="a2"></param>
+        /// <returns>Devolve o valor de acordo com o preço do alojamento.</returns>
+        public int Compare(Alojamento a1, Alojamento a2)
+        {
+            return a1.Preco.CompareTo(a2.Preco);
+        }
+    }
+
     [Serializable]
     public class Alojamento: IComparable<Alojamento>
     {
@@ -164,7 +182,7 @@ namespace ObjetosNegocio
         /// <returns>Devolve uma string com o formato redefinido do alojamento.</returns>
         public override string ToString()
         {
-            return String.Format("Morada: {0}; Quartos: {1}; Camas: {2};Casas de Banho: {3}; Cozinhas: {4}; Preço: {5:0.00}", Morada.ToString(), Quartos.ToString(), Camas.ToString(), CasasBanho.ToString(), Cozinhas.ToString(), Preco);
+            return String.Format("Código: {0}; Morada: {1}; Quartos: {2}; Camas: {3};Casas de Banho: {4}; Cozinhas: {5}; Preço: {6:0.00}", CodigoAlojamento.ToString(), Morada.ToString(), Quartos.ToString(), Camas.ToString(), CasasBanho.ToString(), Cozinhas.ToString(), Preco);
         }
 
         /// <summary>

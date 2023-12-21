@@ -18,17 +18,17 @@ namespace trabalhoPOO_26008
     {
         static void Main(string[] args)
         {
-            try
-            {
-                IO.MostrarMensagem(Regras.CarregaClientes().ToString());
-                IO.MostrarMensagem(Regras.CarregaFuncionarios().ToString());
-                IO.MostrarMensagem(Regras.CarregaAlojamentos().ToString());
-                IO.MostrarMensagem(Regras.CarregaReservas().ToString());
-            }
-            catch (Exception ex)
-            {
-                IO.MostrarMensagemErro(ex.Message);
-            }
+            ////try
+            ////{
+            ////    IO.MostrarMensagem(Regras.CarregaClientes().ToString());
+            ////    IO.MostrarMensagem(Regras.CarregaFuncionarios().ToString());
+            ////    IO.MostrarMensagem(Regras.CarregaAlojamentos().ToString());
+            ////    IO.MostrarMensagem(Regras.CarregaReservas().ToString());
+            ////}
+            ////catch (Exception ex)
+            ////{
+            ////    IO.MostrarMensagemErro(ex.Message);
+            ////}
 
             //Contacto c1 = new Contacto(TipoContacto.Telefone, "1");
             //Contacto c2 = new Contacto(TipoContacto.Fax, "2");
@@ -60,8 +60,26 @@ namespace trabalhoPOO_26008
             //Cliente cli3 = new Cliente(p2, 3);
             //Funcionario fun1 = new Funcionario(p4, 1, TipoCargo.Gestor);
 
-            //Morada mor1 = new Morada("Rua de Cima", 2, "4700-132", "Braga");
-            //Alojamento alo1 = new Alojamento(1, mor1, 3, 5, 2, 1, 20);
+            Morada mor1 = new Morada("Rua de Cima", 2, "4700-132", "Braga");
+            Alojamento alo1 = new Alojamento(1, mor1, 3, 5, 2, 1, 20);
+            Alojamento alo2 = new Alojamento(2, mor1, 4, 4, 3, 1, 5);
+            Alojamento alo3 = new Alojamento(3, mor1, 1, 2, 1, 1, 10);
+            Alojamento alo4 = new Alojamento(4, mor1, 1, 3, 1, 1, 15);
+            bool b1 = Regras.AdicionarAlojamento(alo3);
+            bool b2 = Regras.AdicionarAlojamento(alo1);
+            bool b3 = Regras.AdicionarAlojamento(alo2);
+            bool b4 = Regras.AdicionarAlojamento(alo4);
+
+            Regras.OrdenarAlojamentos();
+            IO.MostrarMensagem("--------------------");
+            IO.MostraAlojamentos(Regras.MostraListaAlojamentos());
+            Regras.OrdenarAlojamentosPrecoCre();
+            IO.MostrarMensagem("--------------------");
+            IO.MostraAlojamentos(Regras.MostraListaAlojamentos());
+            Regras.OrdenarAlojamentosPrecoDec();
+            IO.MostrarMensagem("--------------------");
+            IO.MostraAlojamentos(Regras.MostraListaAlojamentos());
+            IO.MostrarMensagem("--------------------");
 
             //Reserva res1 = new Reserva(1, new DateTime(2024, 1, 1), new DateTime(2024, 1, 25), 1, 1, EstadoReserva.Aberta);
             //Reserva res2 = new Reserva(1, new DateTime(2024, 1, 15), new DateTime(2024, 1, 20), 2, 1, EstadoReserva.Aberta);
@@ -85,27 +103,27 @@ namespace trabalhoPOO_26008
             //bool a = Regras.AdicionarCliente(cli5);
             //Console.WriteLine("-----------------\n" + a.ToString());
 
-            IO.MostrarMensagem("--------------------\n--------------------");
-            IO.MostraClientes(Regras.MostraListaClientes());
-            IO.MostrarMensagem("--------------------");
-            IO.MostraFuncionarios(Regras.MostraListaFuncionarios());
-            IO.MostrarMensagem("--------------------");
-            IO.MostraAlojamentos(Regras.MostraListaAlojamentos());
-            IO.MostrarMensagem("--------------------");
-            IO.MostraReservas(Regras.MostraListaReservas());
-            IO.MostrarMensagem("--------------------\n--------------------");
+            //////IO.MostrarMensagem("--------------------\n--------------------");
+            //////IO.MostraClientes(Regras.MostraListaClientes());
+            //////IO.MostrarMensagem("--------------------");
+            //////IO.MostraFuncionarios(Regras.MostraListaFuncionarios());
+            //////IO.MostrarMensagem("--------------------");
+            //////IO.MostraAlojamentos(Regras.MostraListaAlojamentos());
+            //////IO.MostrarMensagem("--------------------");
+            //////IO.MostraReservas(Regras.MostraListaReservas());
+            //////IO.MostrarMensagem("--------------------\n--------------------");
 
-            try 
-            {
-                IO.MostrarMensagem(Regras.GravaClientes().ToString());
-                IO.MostrarMensagem(Regras.GravaFuncionarios().ToString());
-                IO.MostrarMensagem(Regras.GravaAlojamentos().ToString());
-                IO.MostrarMensagem(Regras.GravaReservas().ToString());
-            }
-            catch (Exception ex)
-            {
-                IO.MostrarMensagemErro(ex.Message);
-            }
+            //try 
+            //{
+            //    IO.MostrarMensagem(Regras.GravaClientes().ToString());
+            //    IO.MostrarMensagem(Regras.GravaFuncionarios().ToString());
+            //    IO.MostrarMensagem(Regras.GravaAlojamentos().ToString());
+            //    IO.MostrarMensagem(Regras.GravaReservas().ToString());
+            //}
+            //catch (Exception ex)
+            //{
+            //    IO.MostrarMensagemErro(ex.Message);
+            //}
 
             bool bl1 = true;
         }

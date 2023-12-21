@@ -384,6 +384,22 @@ namespace RegrasNegocio
         }
 
         /// <summary>
+        /// Método para ordenar a lista de alojamentos por preço crescente.
+        /// </summary>
+        public static void OrdenarAlojamentosPrecoCre()
+        {
+            Alojamentos.OrdenaListaPrecoCre();
+        }
+
+        /// <summary>
+        /// Método para ordenar a lista de alojamentos por preço decrescente.
+        /// </summary>
+        public static void OrdenarAlojamentosPrecoDec()
+        {
+            Alojamentos.OrdenaListaPrecoDec();
+        }
+
+        /// <summary>
         /// Método para gravar a lista de alojamentos num ficheiro.
         /// </summary>
         /// <returns></returns>
