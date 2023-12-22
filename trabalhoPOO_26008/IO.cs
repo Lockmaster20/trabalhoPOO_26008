@@ -74,5 +74,37 @@ namespace trabalhoPOO_26008
                 MostrarMensagem(r.ToString());
             }
         }
+
+        public static void MostraMenu()
+        {
+            Console.WriteLine("------- MENU -------");
+
+            Console.WriteLine("1 - Adicionar cliente");
+            Console.WriteLine("2 - Remover cliente");
+
+            Console.WriteLine("3 - Adicionar funcionario");
+            Console.WriteLine("4 - Remover funcionario");
+
+            Console.WriteLine("5 - Adicionar alojamento");
+            Console.WriteLine("6 - Remover alojamento");
+
+            Console.WriteLine("7 - Adicionar reserva");
+            Console.WriteLine("8 - Cancelar reserva");
+            Console.WriteLine("9 - Remover reserva");
+
+            Console.WriteLine("--------------------");
+        }
+
+        public static int ObterInt()
+        {
+            try
+            {
+                return Convert.ToInt32(Console.ReadLine());
+            } 
+            catch
+            {
+                return -1;
+            }
+        }
     }
 }

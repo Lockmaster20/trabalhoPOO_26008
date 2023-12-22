@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="GereAlojamento.cs" />
     <Compile Include="IO.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
