@@ -197,6 +197,18 @@ namespace Dados
         }
 
         /// <summary>
+        /// Método para encontrar uma reserva na lista com os valores correspondentes.
+        /// </summary>
+        /// <param name="codigoAlojamento">Código do alojamento da reserva</param>
+        /// <param name="codigoCliente">Código do cliente da reserva</param>
+        /// <param name="dataInicio">Data de início da reserva</param>
+        /// <returns>Devolve a reserva da lista com os dados correspondentes.</returns>
+        public static Reserva EncontraReserva(int codigoAlojamento, int codigoCliente, DateTime dataInicio)
+        {
+            return listaReservas.Find(reserva => reserva.CodigoAlojamento == codigoAlojamento && reserva.CodigoCliente == codigoCliente && reserva.DataInicio == dataInicio);
+        }
+
+        /// <summary>
         /// Adiciona reserva na lista.
         /// </summary>
         /// <param name="r">Reserva a adicionar</param>

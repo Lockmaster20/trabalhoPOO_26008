@@ -92,6 +92,31 @@ namespace RegrasNegocio
         }
 
         /// <summary>
+        /// Método para somar um valor aos créditos do cliente.
+        /// </summary>
+        /// <param name="c">Cliente a alterar os créditos</param>
+        /// <param name="valor">Valor a somar</param>
+        /// <returns>Devolve verdadeiro se alterou os créditos com sucesso ou falso se não.</returns>
+        public static bool AlterarCreditoCliente(Cliente c, double valor)
+        {
+            if (c is null) return false;
+            return c.AlterarCredito(valor);
+        }
+
+        /// <summary>
+        /// Método para somar um valor aos créditos do cliente pelo código.
+        /// </summary>
+        /// <param name="codigo">Código do cliente a alterar os créditos</param>
+        /// <param name="valor">Valor a somar</param>
+        /// <returns>Devolve verdadeiro se alterou os créditos com sucesso ou falso se não.</returns>
+        public static bool AlterarCreditoCliente(int codigo, double valor)
+        {
+            Cliente c = Clientes.EncontraCliente(codigo);
+
+            return AlterarCreditoCliente(c, valor);
+        }
+
+        /// <summary>
         /// Método para ordenar a lista de clientes.
         /// </summary>
         public static void OrdenarClientes()
@@ -489,6 +514,7 @@ namespace RegrasNegocio
         /// <returns>Verdadeiro se cancelar com sucesso ou falso se não.</returns>
         public static bool CancelarReserva(Reserva r)
         {
+            if (r is null) return false;
             if (r.Estado == EstadoReserva.Aberta)
             {
                 if (Reservas.CancelarReserva(r))
@@ -507,17 +533,46 @@ namespace RegrasNegocio
         }
 
         /// <summary>
+        /// Método para cancelar uma reserva. Através dos dados correspondentes.
+        /// </summary>
+        /// <param name="codigoAlojamento"></param>
+        /// <param name="codigoCliente"></param>
+        /// <param name="dataInicio"></param>
+        /// <returns>Verdadeiro se cancelar com sucesso ou falso se não.</returns>
+        public static bool CancelarReserva(int codigoAlojamento, int codigoCliente, DateTime dataInicio)
+        {
+            Reserva r = Reservas.EncontraReserva(codigoAlojamento, codigoCliente, dataInicio);
+
+            return CancelarReserva(r);
+        }
+
+        /// <summary>
         /// Método para terminar uma reserva aberta. Só pode terminar depois da data de início da reserva.
         /// </summary>
         /// <param name="r">Reserva a terminar.</param>
         /// <returns>Verdadeiro se terminar com sucesso ou falso se não.</returns>
         public static bool TerminarReserva(Reserva r)
         {
+            if (r is null) return false;
             if (r.Estado == EstadoReserva.Aberta && r.DataInicio<DateTime.Now)
             {
                 return Reservas.TerminarReserva(r);
             }
             return false;
+        }
+
+        /// <summary>
+        /// Método para terminar uma reserva aberta.
+        /// </summary>
+        /// <param name="codigoAlojamento"></param>
+        /// <param name="codigoCliente"></param>
+        /// <param name="dataInicio"></param>
+        /// <returns>Verdadeiro se terminar com sucesso ou falso se não.</returns>
+        public static bool TerminarReserva(int codigoAlojamento, int codigoCliente, DateTime dataInicio)
+        {
+            Reserva r = Reservas.EncontraReserva(codigoAlojamento, codigoCliente, dataInicio);
+
+            return TerminarReserva(r);
         }
 
         /// <summary>
@@ -528,6 +583,20 @@ namespace RegrasNegocio
         public static bool RemoverReserva(Reserva r)
         {
             return Reservas.RemoverReserva(r);
+        }
+
+        /// <summary>
+        /// Método para remover uma reserva da lista de reservas.
+        /// </summary>
+        /// <param name="codigoAlojamento"></param>
+        /// <param name="codigoCliente"></param>
+        /// <param name="dataInicio"></param>
+        /// <returns>Verdadeiro se remover com sucesso ou falso se não.</returns>
+        public static bool RemoverReserva(int codigoAlojamento, int codigoCliente, DateTime dataInicio)
+        {
+            Reserva r = Reservas.EncontraReserva(codigoAlojamento, codigoCliente, dataInicio);
+
+            return RemoverReserva(r);
         }
 
         /// <summary>
