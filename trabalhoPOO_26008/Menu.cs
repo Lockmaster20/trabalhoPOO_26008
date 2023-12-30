@@ -269,6 +269,9 @@ namespace trabalhoPOO_26008
         {
             IO.MostrarMensagem("Adicionar Reserva");
 
+            IO.MostrarMensagem("Código da Reserva:");
+            int codigoReserva = IO.ObterInt();
+
             IO.MostrarMensagem("Código do Alojamento:");
             int codigoAlojamento = IO.ObterInt();
 
@@ -314,7 +317,7 @@ namespace trabalhoPOO_26008
 
             try
             {
-                if (Regras.AdicionarReserva(new Reserva(codigoAlojamento, dataInicio, dataFim, codigoCliente, codigoGestor, estado)))
+                if (Regras.AdicionarReserva(new Reserva(codigoReserva, codigoAlojamento, dataInicio, dataFim, codigoCliente, codigoGestor, estado)))
                 {
                     IO.MostrarMensagemSucesso("Reserva adiconada com sucesso.");
                 }
@@ -328,7 +331,7 @@ namespace trabalhoPOO_26008
 
         /// <summary>
         /// Método para alterar o estado de uma reserva, ou remover a reserva da lista, de acordo com a opção recebida.
-        /// Opção 1 para cancelar a reserva, 2 para terminar a reserva ou 3 para remover a reserva da lista.
+        /// Opção 1 para cancelar a reserva ou 2 para terminar a reserva.
         /// </summary>
         /// <param name="opcao"></param>
         public static void AlterarEstadoReserva(int opcao)
@@ -340,10 +343,6 @@ namespace trabalhoPOO_26008
             else if (opcao == 2)
             {
                 IO.MostrarMensagem("Terminar Reserva");
-            }
-            else if (opcao == 3)
-            {
-                IO.MostrarMensagem("Remover Reserva");
             }
             else
             {
@@ -392,20 +391,32 @@ namespace trabalhoPOO_26008
                         IO.MostrarMensagemErro(e.Message);
                     }
                     break;
-                case 3:
-                    try
-                    {
-                        if (Regras.RemoverReserva(codigoAlojamento, codigoCliente, dataInicio))
-                        {
-                            IO.MostrarMensagemSucesso("Reserva removida com sucesso.");
-                        }
-                        else IO.MostrarMensagemErro("Não foi possível remover a reserva.");
-                    }
-                    catch (Exception e)
-                    {
-                        IO.MostrarMensagemErro(e.Message);
-                    }
-                    break;
+            }
+        }
+
+        /// <summary>
+        /// Método para remover uma reserva da lista com o código recebido da consola.
+        /// </summary>
+        public static void RemoverReserva()
+        {
+            IO.MostrarMensagem("Remover Reserva");
+
+            IO.MostrarMensagem("Código:");
+            int codigo = IO.ObterInt();
+
+            IO.LimparConsola();
+
+            try
+            {
+                if (Regras.RemoverReserva(codigo))
+                {
+                    IO.MostrarMensagemSucesso("Reserva removida com sucesso.");
+                }
+                else IO.MostrarMensagemErro("Não foi possível remover a reserva.");
+            }
+            catch (Exception e)
+            {
+                IO.MostrarMensagemErro(e.Message);
             }
         }
 
@@ -458,7 +469,7 @@ namespace trabalhoPOO_26008
                         AlterarEstadoReserva(2);
                         break;
                     case 11:
-                        AlterarEstadoReserva(3);
+                        RemoverReserva();
                         break;
                     case 20:
                         IO.MostraClientes(Regras.MostraListaClientes());
@@ -495,6 +506,9 @@ namespace trabalhoPOO_26008
                         break;
                     case 51:
                         Regras.OrdenarReservas();
+                        break;
+                    case 52:
+                        Regras.OrdenarReservasDataInicio();
                         break;
                     default:
                         IO.MostrarMensagemErro("Valor inválido, tente novamente.");

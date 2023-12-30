@@ -153,7 +153,8 @@ namespace trabalhoPOO_26008
             Console.WriteLine("43 - Ordenar lista alojamentos por preço decrescente");
             Console.WriteLine();
             Console.WriteLine("50 - Listar reservas");
-            Console.WriteLine("51 - Ordenar lista reservas por data de início");
+            Console.WriteLine("51 - Ordenar lista reservas por código");
+            Console.WriteLine("52 - Ordenar lista reservas por data de início");
 
             Console.WriteLine("0 - Sair");
 

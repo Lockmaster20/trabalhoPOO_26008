@@ -8,9 +8,26 @@
 
 using Outros;
 using System;
+using System.Collections.Generic;
 
 namespace ObjetosNegocio
 {
+    /// <summary>
+    /// Classe para comparar duas reservas pela data de início.
+    /// </summary>
+    public class ReservaPorDataInicio : IComparer<Reserva>
+    {
+        /// <summary>
+        /// Compara duas reservas.
+        /// </summary>
+        /// <param name="r1"></param>
+        /// <param name="r2"></param>
+        /// <returns>Devolve o valor de acordo com a data de início da reserva.</returns>
+        public int Compare(Reserva r1, Reserva r2)
+        {
+            return r1.DataInicio.CompareTo(r2.DataInicio);
+        }
+    }
 
     public enum EstadoReserva
     {
@@ -24,8 +41,9 @@ namespace ObjetosNegocio
     {
         #region Atributos
 
-        static int totalReservas;
+        //static int totalReservas;
 
+        int codigoReserva;
         int codigoAlojamento;
         DateTime dataInicio;
         DateTime dataFim;
@@ -40,22 +58,24 @@ namespace ObjetosNegocio
 
         #region Construtores
 
-        static Reserva()
-        {
-            totalReservas = 0;
-        }
+        //static Reserva()
+        //{
+        //    totalReservas = 0;
+        //}
 
         /// <summary>
         /// Construtor de reserva com os dados completos.
         /// </summary>
+        /// <param name="reserva">Código da reserva.</param>
         /// <param name="alojamento">Alojamento a reservar.</param>
         /// <param name="dataInicio">Data de início da reserva.</param>
         /// <param name="dataFim">Data de fim da reserva.</param>
         /// <param name="cliente">Cliente que faz a reserva.</param>
         /// <param name="gestor">Funcionário que gere a reserva.</param>
         /// <param name="estado">Estado da reserva.</param>
-        public Reserva(int alojamento, DateTime dataInicio, DateTime dataFim, int cliente, int gestor, EstadoReserva estado)
+        public Reserva(int reserva, int alojamento, DateTime dataInicio, DateTime dataFim, int cliente, int gestor, EstadoReserva estado)
         {
+            this.codigoReserva = reserva;
             this.codigoAlojamento = alojamento;
             this.dataInicio = dataInicio;
             this.dataFim = DefDataFim(dataFim);
@@ -67,6 +87,14 @@ namespace ObjetosNegocio
         #endregion
 
         #region Propriedades
+
+        /// <summary>
+        /// Propriedade para o atributo CodigoReserva, pode obter o código da reserva, mas não o pode alterar
+        /// </summary>
+        public int CodigoReserva
+        {
+            get { return codigoReserva; }
+        }
 
         /// <summary>
         /// Propriedade para o atributo Alojamento, pode obter o alojamento, mas não o pode alterar
@@ -130,7 +158,7 @@ namespace ObjetosNegocio
         /// <returns>Devolve uma string com o formato redefinido da reserva.</returns>
         public override string ToString()
         {
-            return String.Format("Cliente {0} reserva alojamento {1}, de {2} a {3}. ({4})", CodigoCliente.ToString(), CodigoAlojamento.ToString(), DataInicio.ToString("yyyy/MM/dd"), DataFim.ToString("yyyy/MM/dd"), Estado.ToString());
+            return String.Format("{0} -> Cliente {1} reserva alojamento {2}, de {3} a {4}. ({5})", CodigoReserva.ToString(), CodigoCliente.ToString(), CodigoAlojamento.ToString(), DataInicio.ToString("yyyy/MM/dd"), DataFim.ToString("yyyy/MM/dd"), Estado.ToString());
         }
 
         /// <summary>
@@ -145,7 +173,7 @@ namespace ObjetosNegocio
             if (objeto is Reserva)
             {
                 Reserva r = (Reserva)objeto;
-                if ((this.CodigoAlojamento == r.CodigoAlojamento) && (Validacoes.VerificaSobreposicaoDatas(DataInicio, DataFim, r.DataInicio, r.DataFim)) && (this.Estado == r.Estado))
+                if (this.CodigoReserva == r.CodigoReserva || ((this.CodigoAlojamento == r.CodigoAlojamento) && (Validacoes.VerificaSobreposicaoDatas(DataInicio, DataFim, r.DataInicio, r.DataFim)) && (this.Estado == r.Estado)))
                 {
                     return true;
                 }
@@ -186,7 +214,7 @@ namespace ObjetosNegocio
         /// <returns>Devolve o total do preço da reserva.</returns>
         public double CalculaCusto(double preco)
         {
-            return (-(CalculaDias() * preco));
+            return (CalculaDias() * preco);
         }
 
         /// <summary>
@@ -216,12 +244,12 @@ namespace ObjetosNegocio
         /// Método para comparar Reservas.
         /// </summary>
         /// <param name="r">Reserva a comparar.</param>
-        /// <returns>Se a data de início da reserva a comparar for menor devolve 1, se for maior devolve -1, se for igual 0.</returns>
+        /// <returns>Se o código da reserva a comparar for menor devolve 1, se for maior devolve -1, se for igual 0.</returns>
         public int CompareTo(Reserva r)
         {
             if (r is null) return 1;
 
-            return DataInicio.CompareTo(r.DataInicio);
+            return CodigoReserva.CompareTo(r.CodigoReserva);
         }
 
         #endregion

@@ -11,6 +11,7 @@ using ObjetosNegocio;
 using RegrasNegocio;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace trabalhoPOO_26008
 {
@@ -25,6 +26,10 @@ namespace trabalhoPOO_26008
                 IO.MostrarMensagem(Regras.CarregaFuncionarios().ToString());
                 IO.MostrarMensagem(Regras.CarregaAlojamentos().ToString());
                 IO.MostrarMensagem(Regras.CarregaReservas().ToString());
+            }
+            catch (FileNotFoundException e)
+            {
+                IO.MostrarMensagemErro(e.Message);
             }
             catch (Exception ex)
             {

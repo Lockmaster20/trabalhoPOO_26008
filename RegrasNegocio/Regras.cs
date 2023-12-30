@@ -494,11 +494,11 @@ namespace RegrasNegocio
                 {
                     return Reservas.AdicionarReserva(r);
                 } 
-                else if(r.Estado == EstadoReserva.Aberta && (r.DataInicio>=DateTime.Now) && Clientes.EncontraCliente(r.CodigoCliente).TemCreditoSuficiente(CalculaCustoReserva(r)) && !Reservas.ExisteReservaClienteAtiva(r.CodigoCliente) && !Reservas.ExisteReservaAlojamentoAtiva(r.CodigoAlojamento, r.DataInicio, r.DataFim))
+                else if(r.Estado == EstadoReserva.Aberta && (r.DataInicio>=DateTime.Now) && Clientes.EncontraCliente(r.CodigoCliente).TemCreditoSuficiente(-CalculaCustoReserva(r)) && !Reservas.ExisteReservaClienteAtiva(r.CodigoCliente) && !Reservas.ExisteReservaAlojamentoAtiva(r.CodigoAlojamento, r.DataInicio, r.DataFim))
                 {  
                     if (Reservas.AdicionarReserva(r))
                     {
-                        return Clientes.EncontraCliente(r.CodigoCliente).AlterarCredito(CalculaCustoReserva(r));
+                        return Clientes.EncontraCliente(r.CodigoCliente).AlterarCredito(-CalculaCustoReserva(r));
                     }
                 }
             }
@@ -508,6 +508,7 @@ namespace RegrasNegocio
 
         /// <summary>
         /// Método para cancelar uma reserva. Só pode terminar uma reserva aberta. 
+        /// Se cancelar 60 dias antes da data de início, devolve o valor da reserva ao cliente.
         /// Se cancelar 10 dias antes da data de início, devolve metade do valor da reserva ao cliente.
         /// </summary>
         /// <param name="r"></param>
@@ -519,9 +520,13 @@ namespace RegrasNegocio
             {
                 if (Reservas.CancelarReserva(r))
                 {
-                    if ((r.DataInicio-DateTime.Now).Days >= 10)
+                    if ((r.DataInicio-DateTime.Now).Days >= 60)
                     {
-                        return Clientes.EncontraCliente(r.CodigoCliente).AlterarCredito(-(CalculaCustoReserva(r)/2));
+                        return Clientes.EncontraCliente(r.CodigoCliente).AlterarCredito(CalculaCustoReserva(r));
+                    }
+                    else if ((r.DataInicio - DateTime.Now).Days >= 10)
+                    {
+                        return Clientes.EncontraCliente(r.CodigoCliente).AlterarCredito(CalculaCustoReserva(r)/2);
                     }
                     else
                     {
@@ -541,7 +546,7 @@ namespace RegrasNegocio
         /// <returns>Verdadeiro se cancelar com sucesso ou falso se não.</returns>
         public static bool CancelarReserva(int codigoAlojamento, int codigoCliente, DateTime dataInicio)
         {
-            Reserva r = Reservas.EncontraReserva(codigoAlojamento, codigoCliente, dataInicio);
+            Reserva r = Reservas.EncontraReserva(codigoAlojamento, codigoCliente, dataInicio, EstadoReserva.Aberta);
 
             return CancelarReserva(r);
         }
@@ -570,7 +575,7 @@ namespace RegrasNegocio
         /// <returns>Verdadeiro se terminar com sucesso ou falso se não.</returns>
         public static bool TerminarReserva(int codigoAlojamento, int codigoCliente, DateTime dataInicio)
         {
-            Reserva r = Reservas.EncontraReserva(codigoAlojamento, codigoCliente, dataInicio);
+            Reserva r = Reservas.EncontraReserva(codigoAlojamento, codigoCliente, dataInicio, EstadoReserva.Aberta);
 
             return TerminarReserva(r);
         }
@@ -588,13 +593,11 @@ namespace RegrasNegocio
         /// <summary>
         /// Método para remover uma reserva da lista de reservas.
         /// </summary>
-        /// <param name="codigoAlojamento"></param>
-        /// <param name="codigoCliente"></param>
-        /// <param name="dataInicio"></param>
+        /// <param name="codigoReserva">Código da reserva a remover</param>
         /// <returns>Verdadeiro se remover com sucesso ou falso se não.</returns>
-        public static bool RemoverReserva(int codigoAlojamento, int codigoCliente, DateTime dataInicio)
+        public static bool RemoverReserva(int codigoReserva)
         {
-            Reserva r = Reservas.EncontraReserva(codigoAlojamento, codigoCliente, dataInicio);
+            Reserva r = Reservas.EncontraReserva(codigoReserva);
 
             return RemoverReserva(r);
         }
@@ -605,6 +608,14 @@ namespace RegrasNegocio
         public static void OrdenarReservas()
         {
             Reservas.OrdenaLista();
+        }
+
+        /// <summary>
+        /// Método para ordenar a lista de reservas.
+        /// </summary>
+        public static void OrdenarReservasDataInicio()
+        {
+            Reservas.OrdenaListaDataInicio();
         }
 
         /// <summary>

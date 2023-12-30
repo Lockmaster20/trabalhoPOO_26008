@@ -139,7 +139,7 @@ namespace Dados
         }
 
         /// <summary>
-        /// Método para verificar se um alojamento já tem uma reserva ativa no intervalo de datas.
+        /// Método para verificar se um alojamento já tem uma reserva aberta no intervalo de datas.
         /// </summary>
         /// <param name="codigoAlojamento">Código do alojamento a encontrar.</param>
         /// <param name="dataInicio">Data de início da reserva a verificar.</param>
@@ -202,10 +202,21 @@ namespace Dados
         /// <param name="codigoAlojamento">Código do alojamento da reserva</param>
         /// <param name="codigoCliente">Código do cliente da reserva</param>
         /// <param name="dataInicio">Data de início da reserva</param>
+        /// <param name="estado">Estado da reserva</param>
         /// <returns>Devolve a reserva da lista com os dados correspondentes.</returns>
-        public static Reserva EncontraReserva(int codigoAlojamento, int codigoCliente, DateTime dataInicio)
+        public static Reserva EncontraReserva(int codigoAlojamento, int codigoCliente, DateTime dataInicio, EstadoReserva estado)
         {
-            return listaReservas.Find(reserva => reserva.CodigoAlojamento == codigoAlojamento && reserva.CodigoCliente == codigoCliente && reserva.DataInicio == dataInicio);
+            return listaReservas.Find(reserva => reserva.CodigoAlojamento == codigoAlojamento && reserva.CodigoCliente == codigoCliente && reserva.DataInicio == dataInicio && reserva.Estado == estado);
+        }
+
+        /// <summary>
+        /// Método para encontrar uma reserva na lista com o código correspondente.
+        /// </summary>
+        /// <param name="codigo">Código da reserva</param>
+        /// <returns>Devolve a reserva da lista com o código correspondente.</returns>
+        public static Reserva EncontraReserva(int codigo)
+        {
+            return listaReservas.Find(reserva => reserva.CodigoReserva == codigo);
         }
 
         /// <summary>
@@ -250,6 +261,14 @@ namespace Dados
         public static void OrdenaLista()
         {
             listaReservas.Sort();
+        }
+
+        /// <summary>
+        /// Método para ordenar a lista por data de início das reservas.
+        /// </summary>
+        public static void OrdenaListaDataInicio()
+        {
+            listaReservas.Sort(new ReservaPorDataInicio());
         }
 
         public static bool CancelarReserva(Reserva r)
